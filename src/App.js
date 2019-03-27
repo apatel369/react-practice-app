@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium, {StyleRoot}from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -48,10 +47,6 @@ class App extends Component {
       border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
     };
 
     let persons = null;
@@ -86,7 +81,6 @@ class App extends Component {
     }
     
     return (
-      <StyleRoot>
       <div className="App">
         <h1 className={classes.join(' ')}>Jay Swaminarayan</h1>
         <button
@@ -94,9 +88,8 @@ class App extends Component {
           onClick={this.togglePersonsHandler}>Toggle Persons</button>
         {persons}
       </div>
-      </StyleRoot>
     );
   }
 }
 
-export default Radium(App);
+export default App;
