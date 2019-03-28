@@ -1,12 +1,8 @@
 import React from 'react';
 import classes from './Person.css';
 
-const person = (props) => {
-    const style = {
-    '@media (min-width: 500px)' :{
-        width: '450px'
-    }
-} 
+const Person = (props) => {
+    console.log('person js remder');
     return (
         <div className={classes.Person}>
         <p onClick={props.click}>{props.name} is {props.age} years old</p>
@@ -16,4 +12,4 @@ const person = (props) => {
     )
 }
 
-export default person;
+export default Person;

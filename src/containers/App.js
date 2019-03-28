@@ -4,6 +4,11 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    console.log('[App.js] construtor');
+  }
+
   state = {
     persons: [
       {id: '12', name: 'Swamiji', age: '86'},
@@ -13,6 +18,15 @@ class App extends Component {
     otherState: "other value",
     showPersons: false
   };
+  
+  static getDerivedStateFromProps(props, state){
+    console.log('app js getderivedstatre props', props);
+    return state;
+  }
+
+  componentDidMount(){
+    console.log('app js component did mount');
+  }
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -29,36 +43,40 @@ class App extends Component {
     persons[personIndex] = person;
 
     this.setState({persons: persons});
-  }
-  deletePersonHandler = (personIndex) => {
+  };
+  deletePersonHandler = personIndex => {
     // const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({persons: persons});
-  }
+  };
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({showPersons: !doesShow})
-  }
+    this.setState({showPersons: !doesShow});
+  };
 
   render() {
+    console.log('app js render');
     let persons = null;
 
     if (this.state.showPersons) {
-      persons =
+      persons = (
           <Persons 
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
-            changed={this.nameChangedHandler}/>;
-      
+            changed={this.nameChangedHandler}
+          />
+      );
     }
 
     return (
       <div className={classes.App}>
-        <Cockpit 
+        <Cockpit
+          title={this.props.appTitle} 
           showPersons={this.state.showPersons}
           persons={this.state.persons}
-          clicked={this.togglePersonsHandler}/>
+          clicked={this.togglePersonsHandler
+        }/>
         {persons}
       </div>
     );
