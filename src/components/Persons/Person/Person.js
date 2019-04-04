@@ -1,6 +1,20 @@
+/* eslint-disable react/no-typos */
 import React, { Component, Fragment } from "react";
+import withClass from "../../../hoc/withClass"; 
+import classes from './Person.css';
+import PropTypes from 'prop-types';
 
 class Person extends Component {
+  constructor(props){
+    super(props);
+    this.inutElementRef = React.createRef();
+  }
+
+  componentDidMount(){
+    // this.inutElement.focus();
+    this.inutElementRef.current.focus();
+  }
+
   render() {
     console.log("person js remder");
     return (
@@ -10,6 +24,8 @@ class Person extends Component {
         </p>
         <p>{this.props.children}</p>
         <input
+          // ref={(inputEl) => {this.inutElement = inputEl}}
+          ref={this.inutElementRef}
           type="text"
           onChange={this.props.changed}
           value={this.props.name}
@@ -19,4 +35,11 @@ class Person extends Component {
   }
 }
 
-export default Person;
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changed: PropTypes.func
+};
+
+export default withClass(Person, classes.Person);

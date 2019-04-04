@@ -12,9 +12,9 @@ class App extends Component {
 
   state = {
     persons: [
-      { id: "12", name: "Swamiji", age: "86" },
-      { id: "222", name: "ProbodhSwamiji", age: "63" },
-      { id: "33", name: "Saradta-Vishwas", age: "86" }
+      { id: "12", name: "Swamiji", age: 86 },
+      { id: "222", name: "ProbodhSwamiji", age: 63 },
+      { id: "33", name: "Saradta-Vishwas", age: 86 }
     ],
     otherState: "other value",
     showPersons: false,
@@ -53,7 +53,12 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState({ persons: persons });
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1
+      };
+    });
   };
   deletePersonHandler = personIndex => {
     // const persons = this.state.persons.slice();
