@@ -1,32 +1,32 @@
-import React, { useEffect, useRef, useContext} from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import classes from "./Cockpit.css";
 import AuthContext from "../../context/auth-context";
 
 const cockpit = props => {
-  const toggleBtnRef =  useRef(null);
+  const toggleBtnRef = useRef(null);
   const authContext = useContext(AuthContext);
 
   console.log(authContext.authenticated);
- 
+
   useEffect(() => {
-    console.log('[cockpit.js useeffect');
-    
+    console.log("[cockpit.js useeffect");
+
     // setTimeout(() => {
     //   alert("saved data");
     // }, 1000);
     toggleBtnRef.current.click();
 
-    return() => {
-      console.log('[Cockpit.js] cleanup');
+    return () => {
+      console.log("[Cockpit.js] cleanup");
     };
   }, []);
 
   useEffect(() => {
-    console.log('cockpitjs 2nd useEffect')
+    console.log("cockpitjs 2nd useEffect");
     return () => {
-      console.log('cockpitjs cleanup 2nd useEffect')
+      console.log("cockpitjs cleanup 2nd useEffect");
     };
-  })
+  });
 
   const assignedClasses = [];
   let btnClass = "";
@@ -47,9 +47,9 @@ const cockpit = props => {
       <button ref={toggleBtnRef} className={btnClass} onClick={props.clicked}>
         Toggle Persons
       </button>
-        <button onClick={authContext.login}>Log in</button>
+      <button onClick={authContext.login}>Log in</button>
     </div>
   );
-}
+};
 
 export default React.memo(cockpit);
