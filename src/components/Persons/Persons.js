@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import Person from "./Person/Person.js";
-import AuthContext from "../../context/auth-context"
+import AuthContext from "../../context/auth-context";
 
 class Persons extends PureComponent {
   // static getDerivedStateFromProps(props, state) {
@@ -13,7 +13,7 @@ class Persons extends PureComponent {
   //   if (
   //     nextProps.persons !== this.props.persons ||
   //     nextProps.changed !== this.props.changed ||
-  //     nextProps.clicked !== this.props.clicked 
+  //     nextProps.clicked !== this.props.clicked
   //   ){
   //     return true;
   //   } else {
@@ -21,41 +21,42 @@ class Persons extends PureComponent {
   //   }
   // }
 
-  getSnapshotBeforeUpdate(prevProp, prevState){
-    console.log('persons.js getSnapshotBeforeUpdate');
-    return { messsage: 'Snapshot'};
+  getSnapshotBeforeUpdate(prevProp, prevState) {
+    console.log("persons.js getSnapshotBeforeUpdate");
+    return { messsage: "Snapshot" };
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('persons.js componentdidupdate');
+    console.log("persons.js componentdidupdate");
     console.log(snapshot);
   }
-  
-  componentWillUnmount(){
-    console.log('persons.js componentWillUnmount');
+
+  componentWillUnmount() {
+    console.log("persons.js componentWillUnmount");
   }
 
   render() {
-    console.log('persons.js rendering');
+    console.log("persons.js rendering");
 
     return (
-    <AuthContext.Consumer>
-    { (context) => this.props.persons.map((person, index) => {
-      return (
-        <Person
-          name={person.name}
-          age={person.age}
-          key={person.id}
-          changed={event => this.props.changed(event, person.id)}
-          click={() => this.props.clicked(index)}
-          isAuth={this.props.isAuthenticated}
-        />
-      );
-      })
+      <AuthContext.Consumer>
+        {context =>
+          this.props.persons.map((person, index) => {
+            return (
+              <Person
+                name={person.name}
+                age={person.age}
+                key={person.id}
+                changed={event => this.props.changed(event, person.id)}
+                click={() => this.props.clicked(index)}
+                isAuth={this.props.isAuthenticated}
+              />
+            );
+          })
+        }
+      </AuthContext.Consumer>
+    );
   }
-  </AuthContext.Consumer>
-  );
-}
 }
 
 export default Persons;
